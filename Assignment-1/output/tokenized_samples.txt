@@ -1,4 +1,4 @@
-this,is,an,n,l,p,course
-i,love,n,l,p
-how,are,you,doing,today
-my,name,is,k,h,ush,dev
+this$,is$,an$,n,l,p$,course$
+i$,love$,n,l,p$
+how$,are$,you$,doing$,today$
+my$,name$,is$,k,h,ush,dev,$
