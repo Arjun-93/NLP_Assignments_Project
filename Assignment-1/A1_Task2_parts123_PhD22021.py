@@ -64,9 +64,9 @@ class BigramLM:
     
     def compute_bigram_frequencies(self, vocab, lines):
         bigram_frequencies = dict()
-        for w1 in vocab:
-            for w2 in vocab:
-                bigram_frequencies[(w1, w2)] = 0
+        # for w1 in vocab:
+        #     for w2 in vocab:
+        #         bigram_frequencies[(w1, w2)] = 0
         #unique_bigrams = set()
         for sentence in lines:
             given_word = None
@@ -227,7 +227,7 @@ class BigramLM:
         return top_k_bigrams_dict
 
     def learnModel(self, filename):
-        smoothing = 1
+        smoothing = 2
         dataset = self.prep_data(self.tokenize_sentence(self.load_file(filename)))
         dataVocab = self.vocabulary(dataset)
         unique_word_frequency = self.freq_of_unique_words(dataset)
