@@ -12,9 +12,9 @@ def load_dataset(file_path):
 def bio_encode(case):
     text = case['data']['text']
     annotations = case['annotations'][0]['result']
-    ##tokens = text.split()
-    pattern = r'\S+|\n+'
-    tokens = re.findall(pattern, text)
+    tokens = text.split()
+    # pattern = r'\S+|\n+'
+    # tokens = re.findall(pattern, text)
     if text == "(See Principles of Statutory Interpretation by Justice G.P. Singh, 9th Edn., 2004 at p. \n\n 438.).":
         print(tokens)
     ##tk = WhitespaceTokenizer() 
