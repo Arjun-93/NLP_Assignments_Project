@@ -2,6 +2,7 @@ import json
 from sklearn.model_selection import train_test_split
 ##from nltk.tokenize import WhitespaceTokenizer
 import re
+import os
 
 # load the dataset
 def load_dataset(file_path):
@@ -12,9 +13,8 @@ def load_dataset(file_path):
 def bio_encode(case):
     text = case['data']['text']
     annotations = case['annotations'][0]['result']
-    tokens = text.split()
-    # pattern = r'\S+|\n+'
-    # tokens = re.findall(pattern, text)
+    pattern = r'[ \t]+'
+    tokens = re.split(pattern, text)
     if text == "(See Principles of Statutory Interpretation by Justice G.P. Singh, 9th Edn., 2004 at p. \n\n 438.).":
         print(tokens)
     ##tk = WhitespaceTokenizer() 
@@ -54,20 +54,20 @@ def save_to_json(data, file_name):
         json.dump(data, file)
 
 if __name__ == "__main__":
-    file_path = "C:\\Users\\playf\\VScode\\NLP-A2\\NER\\NER_TRAIN_JUDGEMENT.json"
+    file_path = os.path.join(os.getcwd(), 'NLP-A2', 'NER', 'NER_TRAIN_JUDGEMENT.json')
     train_data, val_data = process_dataset(file_path)
-    test_data = load_dataset('C:\\Users\\playf\\VScode\\NLP-A2\\NER\\NER_TEST_JUDGEMENT.json')
+    test_data = load_dataset(os.path.join(os.getcwd(), 'NLP-A2', 'NER', 'NER_TEST_JUDGEMENT.json'))
     
-    save_to_json(train_data, 'C:\\Users\\playf\\VScode\\NLP-A2\\NER\\NER_train_data.json')
-    save_to_json(val_data, 'C:\\Users\\playf\\VScode\\NLP-A2\\NER\\NER_val_data.json')
-    save_to_json(test_data, 'C:\\Users\\playf\\VScode\\NLP-A2\\NER\\NER_test_data.json')
+    save_to_json(train_data, os.path.join(os.getcwd(), 'NLP-A2', 'NER', 'NER_train_split.json'))
+    save_to_json(val_data, os.path.join(os.getcwd(), 'NLP-A2', 'NER', 'NER_val_split.json'))
+    save_to_json(test_data, os.path.join(os.getcwd(), 'NLP-A2', 'NER', 'NER_test_split.json'))
     print("Data splits saved successfully.")
     
     train_data_bio = {case['id']: bio_encode(case) for case in train_data}
     val_data_bio = {case['id']: bio_encode(case) for case in val_data}
     test_data_bio = {case['id']: bio_encode(case) for case in test_data}
     
-    save_to_json(train_data_bio, 'C:\\Users\\playf\\VScode\\NLP-A2\\NER\\NER_train.json')
-    save_to_json(val_data_bio, 'C:\\Users\\playf\\VScode\\NLP-A2\\NER\\NER_val.json')
-    save_to_json(test_data_bio, 'C:\\Users\\playf\\VScode\\NLP-A2\\NER\\NER_test.json')
+    save_to_json(train_data_bio, os.path.join(os.getcwd(), 'NLP-A2', 'NER', 'NER_train.json'))
+    save_to_json(val_data_bio, os.path.join(os.getcwd(), 'NLP-A2', 'NER', 'NER_val.json'))
+    save_to_json(test_data_bio, os.path.join(os.getcwd(), 'NLP-A2', 'NER', 'NER_test.json'))
     print("BIO encodings saved successfully.")
